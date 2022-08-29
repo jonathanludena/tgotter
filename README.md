@@ -1,4 +1,6 @@
-# Detalles del proyecto
+# Tgotter
+
+## Detalles del proyecto
 
 - Este proyecto esta hecho con **Golang** para una API, refiere un backend para una app con **React**
 
