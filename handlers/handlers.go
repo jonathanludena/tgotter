@@ -5,6 +5,9 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/jonathanludena/tgotter/middlew"
+	"github.com/jonathanludena/tgotter/routers"
+
 	"github.com/gorilla/mux"
 	"github.com/rs/cors"
 )
@@ -12,6 +15,8 @@ import (
 /* Handler API and Listen PORT */
 func Handlers() {
 	router := mux.NewRouter()
+
+	router.HandleFunc("/register", middlew.CheckDB(routers.Register)).Methods("POST")
 
 	PORT := os.Getenv("PORT")
 	if PORT != "" {
