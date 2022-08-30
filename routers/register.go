@@ -12,6 +12,7 @@ import (
 func Register(w http.ResponseWriter, r *http.Request) {
 	var t models.User
 	err := json.NewDecoder(r.Body).Decode(&t)
+
 	if err != nil {
 		http.Error(w, "Error data received "+err.Error(), 400)
 		return
@@ -28,7 +29,7 @@ func Register(w http.ResponseWriter, r *http.Request) {
 	}
 
 	_, finded, _ := bd.CheckUserExists(t.Email)
-	if finded == true {
+	if finded {
 		http.Error(w, "User exists with this email", 400)
 		return
 	}
@@ -39,7 +40,7 @@ func Register(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if status == false {
+	if !status {
 		http.Error(w, "Something was wrong, error in operation => InsertUser", 400)
 		return
 	}

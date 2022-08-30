@@ -19,10 +19,11 @@ func Handlers() {
 	router.HandleFunc("/register", middlew.CheckDB(routers.Register)).Methods("POST")
 
 	PORT := os.Getenv("PORT")
-	if PORT != "" {
+	if PORT == "" {
 		PORT = "8080"
 	}
 
 	handler := cors.AllowAll().Handler(router)
+	log.Println("Server on port " + PORT)
 	log.Fatal(http.ListenAndServe(":"+PORT, handler))
 }
