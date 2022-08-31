@@ -19,9 +19,11 @@ var IDUser string
 /* Process Token extract data token */
 func ProcessToken(tk string) (*models.Claim, bool, string, error) {
 	SECRET := os.Getenv("SECRET")
+	mySecret := []byte(SECRET)
 	claims := &models.Claim{}
 
-	splitToken := strings.Split(tk, "Bearer ")
+	splitToken := strings.Split(tk, "Bearer")
+
 	if len(splitToken) != 2 {
 		return claims, false, string(""), errors.New("token format invalid")
 	}
@@ -29,7 +31,7 @@ func ProcessToken(tk string) (*models.Claim, bool, string, error) {
 	tk = strings.TrimSpace(splitToken[1])
 
 	tkn, err := jwt.ParseWithClaims(tk, claims, func(t *jwt.Token) (interface{}, error) {
-		return SECRET, nil
+		return mySecret, nil
 	})
 
 	if err == nil {
