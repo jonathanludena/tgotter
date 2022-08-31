@@ -18,6 +18,7 @@ func Handlers() {
 
 	router.HandleFunc("/register", middlew.CheckDB(routers.Register)).Methods("POST")
 	router.HandleFunc("/login", middlew.CheckDB(routers.Login)).Methods("POST")
+	router.HandleFunc("/profile", middlew.CheckDB(middlew.ValidateJWT(routers.ProfileView))).Methods("GET")
 
 	PORT := os.Getenv("PORT")
 	if PORT == "" {
