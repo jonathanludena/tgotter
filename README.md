@@ -6,3 +6,4 @@
 
 - Para su despliegue y CI/CD se está usando [Railway](https://railway.app/)
   > **Railway** por su integración con [Github](https://github.com)
+- Usando Mongo cloud como DB
